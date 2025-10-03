@@ -9,8 +9,10 @@ import pickle
 import os
 import numpy as np
 
+import pysnooper
 
-url_base = 'http://yann.lecun.com/exdb/mnist/'
+url_base = 'http://ossci-datasets.s3.amazonaws.com/mnist/'
+# url_base = 'http://yann.lecun.com/exdb/mnist/'
 key_file = {
     'train_img':'train-images-idx3-ubyte.gz',
     'train_label':'train-labels-idx1-ubyte.gz',
@@ -36,7 +38,8 @@ def _download(file_name):
     print("Downloading " + file_name + " ... ")
     urllib.request.urlretrieve(url_base + file_name, file_path)
     print("Done")
-    
+
+@pysnooper.snoop()    
 def download_mnist():
     for v in key_file.values():
        _download(v)
